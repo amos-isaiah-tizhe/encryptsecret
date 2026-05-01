@@ -1,0 +1,8 @@
+.ssh/
+*.pem
+*.key
+*.zip
+.env
+node_modules/
+tmp/
+*.pub

@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EncryptSecret Help & Support — Learn how to use EncryptSecret, troubleshoot issues, and get in touch." />
+  <title>EncryptSecret — Help & Support</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2300c896'/><path d='M16 6 L24 10 L24 18 Q24 24 16 27 Q8 24 8 18 L8 10 Z' fill='none' stroke='white' stroke-width='2'/></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <style>
+    /* ── LAYOUT ── */
+    .help-wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      margin-bottom: 2.5rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .help-hero { margin-bottom: 2.5rem; }
+    .help-hero h1 {
+      font-size: clamp(1.9rem, 5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 12px;
+      margin-top: 16px;
+    }
+    .help-hero h1 span {
+      background: linear-gradient(135deg, var(--accent) 0%, #a07cff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .help-hero p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      max-width: 500px;
+    }
+
+    /* ── QUICK LINKS ── */
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+    .quick-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 18px 16px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.2s, transform 0.2s var(--ease);
+    }
+    .quick-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .qc-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .qc-icon--green  { background: var(--accent-dim); color: var(--accent); }
+    .qc-icon--blue   { background: rgba(100,130,255,0.1); color: #906fe5; }
+    .qc-icon--amber  { background: var(--amber-dim); color: var(--amber); }
+    .qc-title { font-size: 0.88rem; font-weight: 700; color: var(--text); }
+    .qc-sub   { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── SECTION HEADING ── */
+    .help-section { margin-bottom: 2.25rem; }
+    .help-section-title {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem;
+    }
+
+    /* ── NOTICE BOX ── */
+    .notice-box {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--amber-dim);
+      border: 1px solid rgba(245,166,35,0.2);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin-bottom: 2rem;
+    }
+    .notice-box > i { color: var(--amber); font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
+    .notice-box p  { font-size: 0.85rem; color: #c9974a; line-height: 1.6; }
+    .notice-box strong { color: var(--amber); }
+
+    /* ── GUIDE STEPS ── */
+    .guide-steps { display: flex; flex-direction: column; gap: 10px; }
+    .guide-step {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      display: flex; align-items: flex-start; gap: 16px;
+      transition: border-color 0.2s;
+    }
+    .guide-step:hover { border-color: var(--card-border2); }
+    .step-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      border: 1.5px solid rgba(0,200,150,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--accent); font-family: var(--font-mono);
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .guide-step-body h3 {
+      font-size: 0.9rem; font-weight: 700;
+      color: var(--text); margin-bottom: 4px;
+    }
+    .guide-step-body p {
+      font-size: 0.84rem; color: var(--text-muted); line-height: 1.6;
+    }
+    .guide-step-body code {
+      font-family: var(--font-mono); font-size: 0.8rem;
+      background: var(--surface); border: 1px solid var(--card-border);
+      border-radius: 4px; padding: 1px 6px; color: var(--accent2);
+    }
+
+    /* ── FAQ ACCORDION ── */
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: var(--card-border2); }
+    .faq-trigger {
+      width: 100%; background: none; border: none;
+      padding: 16px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      cursor: pointer; text-align: left;
+      transition: background 0.15s;
+    }
+    .faq-trigger:hover { background: rgba(255,255,255,0.02); }
+    .faq-q { display: flex; align-items: center; gap: 12px; flex: 1; }
+    .faq-q i { color: var(--accent); font-size: 0.85rem; width: 16px; flex-shrink: 0; }
+    .faq-q span { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .faq-chevron {
+      color: var(--text-dim); font-size: 0.75rem;
+      transition: transform 0.25s var(--ease); flex-shrink: 0;
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--accent); }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.3s var(--ease); }
+    .faq-item.open .faq-body { max-height: 500px; }
+    .faq-answer {
+      padding: 14px 20px 18px 48px;
+      font-size: 0.88rem; color: var(--text-muted); line-height: 1.7;
+      border-top: 1px solid var(--card-border);
+    }
+    .faq-answer code {
+      font-family: var(--font-mono); font-size: 0.82rem;
+      background: var(--surface); border: 1px solid var(--card-border);
+      border-radius: 4px; padding: 1px 6px; color: var(--accent2);
+    }
+
+    /* ── CONTACT CARDS ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-decoration: none;
+      display: flex; align-items: flex-start; gap: 14px;
+      transition: border-color 0.2s, transform 0.2s var(--ease);
+    }
+    .contact-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .contact-icon {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .ci--green  { background: var(--accent-dim); color: var(--accent); }
+    .ci--purple { background: rgba(180,130,255,0.1); color: #906fe5; }
+    .ci--blue   { background: rgba(100,130,255,0.1); color: #a07cff; }
+    .ci--amber  { background: var(--amber-dim); color: var(--amber); }
+    .cc-title  { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .cc-desc   { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+    .cc-handle { font-size: 0.78rem; font-family: var(--font-mono); color: var(--accent); margin-top: 4px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .quick-links  { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .faq-answer   { padding-left: 20px; }
+    }
+    @media (max-width: 400px) {
+      .quick-links { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </span>
+        Encrypt<span class="logo-accent">Secret</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html" class="nav-link">Create note</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle">
+        <i id="themeIcon" class="fa-solid fa-moon"></i>
+        <span id="themeLabel">Dark</span>
+      </button>
+    </header>
+
+    <!-- MAIN -->
+    <main class="help-wrapper">
+
+      <a href="index.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to EncryptSecret
+      </a>
+
+      <!-- HERO -->
+      <div class="help-hero">
+        <div class="hero-badge">
+          <i class="fa-solid fa-circle-question"></i>
+          Help &amp; Support
+        </div>
+        <h1>How can we <span>help you?</span></h1>
+        <p>Find answers to common questions, learn how EncryptSecret works, or reach out directly if something isn't right.</p>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="quick-links">
+        <a class="quick-card" href="#how-to-use">
+          <div class="qc-icon qc-icon--green"><i class="fa-solid fa-book-open"></i></div>
+          <div>
+            <div class="qc-title">How to use EncryptSecret</div>
+            <div class="qc-sub">Step-by-step guide</div>
+          </div>
+        </a>
+        <a class="quick-card" href="#faq">
+          <div class="qc-icon qc-icon--blue"><i class="fa-solid fa-circle-question"></i></div>
+          <div>
+            <div class="qc-title">Common questions</div>
+            <div class="qc-sub">FAQ &amp; troubleshooting</div>
+          </div>
+        </a>
+        <a class="quick-card" href="#contact">
+          <div class="qc-icon qc-icon--amber"><i class="fa-solid fa-paper-plane"></i></div>
+          <div>
+            <div class="qc-title">Contact Developer</div>
+            <div class="qc-sub">Report a bug or say hi</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- NOTICE -->
+      <div class="notice-box">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p>
+          <strong>EncryptSecret cannot recover deleted notes.</strong>
+          Once a note is read or its expiry time passes, it is permanently deleted from the database — by design. There is no way to get it back.
+        </p>
+      </div>
+
+      <!-- ── HOW TO USE ── -->
+      <div class="help-section" id="how-to-use">
+        <div class="help-section-title">
+          <i class="fa-solid fa-book-open"></i>
+          How to use EncryptSecret
+        </div>
+        <div class="guide-steps">
+
+          <div class="guide-step">
+            <div class="step-num">01</div>
+            <div class="guide-step-body">
+              <h3>Write your secret message</h3>
+              <p>On the home page, type anything you want to share privately — a password, a personal note, sensitive info. Only the person you send the link to will ever see it.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="step-num">02</div>
+            <div class="guide-step-body">
+              <h3>Set your options</h3>
+              <p>Choose how long the note lives (<code>1 hour</code> to <code>7 days</code>), whether it burns after one read or allows multiple views, and optionally protect it with a password.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="step-num">03</div>
+            <div class="guide-step-body">
+              <h3>Copy and share the link</h3>
+              <p>After creating the note you'll get a unique link. Send it to your recipient over WhatsApp, email, Telegram — any platform you like.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="step-num">04</div>
+            <div class="guide-step-body">
+              <h3>Recipient opens the link</h3>
+              <p>When they open it, EncryptSecret decrypts the message directly in their browser. If burn-after-reading is on, the note is deleted from the database the moment they view it.</p>
+            </div>
+          </div>
+
+          <div class="guide-step">
+            <div class="step-num">05</div>
+            <div class="guide-step-body">
+              <h3>Note is gone forever</h3>
+              <p>After the note is read or expires, it is permanently deleted. Anyone trying to open the same link again will find nothing — because nothing remains.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── FAQ ── -->
+      <div class="help-section" id="faq">
+        <div class="help-section-title">
+          <i class="fa-solid fa-circle-question"></i>
+          Frequently asked questions
+        </div>
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <div class="faq-q">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Is EncryptSecret actually secure?</span>
+              </div>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-body">
+              <div class="faq-answer">
+                Yes. Your message is encrypted using <strong>AES-256-GCM</strong> — the same standard used by banks and governments. Encryption happens entirely in your browser before anything is sent to the server, so even the database only stores encrypted gibberish. Nobody can read your message except the person with the link.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <div class="faq-q">
+                <i class="fa-solid fa-eye-slash"></i>
+                <span>Can EncryptSecret read my messages?</span>
+              </div>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-body">
+              <div class="faq-answer">
+                No. The decryption key is embedded in the link itself and is never sent to the server. The server only ever receives encrypted data — there is literally nothing to read on our end.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <div class="faq-q">
+                <i class="fa-solid fa-fire"></i>
+                <span>What does "burn after reading" mean?</span>
+              </div>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-body">
+              <div class="faq-answer">
+                It means the note is <strong>permanently deleted</strong> from the database the instant the recipient opens and decrypts it. If anyone tries to open the same link again, they'll get a "note not found" message — because it no longer exists.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <div class="faq-q">
+                <i class="fa-solid fa-link-slash"></i>
+                <span>My link says "note not found" — what happened?</span>
+              </div>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-body">
+              <div class="faq-answer">
+                This happens when one of the following occurred:<br /><br />
+                • The note was already read (burn-after-reading deleted it)<br />
+                • The note reached its expiry time and was automatically deleted<br />
+                • The max number of views was reached<br />
+                • The link was copied incorrectly<br /><br />
+                Deleted notes <strong>cannot be recovered</strong>. The sender will need to create a new one.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <div class="faq-q">
+                <i class="fa-solid fa-lock"></i>
+                <span>I forgot the password to open the note</span>
+              </div>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-body">
+              <div class="faq-answer">
+                There is no password recovery. The password is part of the encryption key — without the correct password the note cannot be decrypted. Ask the sender to share the password through a separate secure channel (like a phone call).
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <div class="faq-q">
+                <i class="fa-solid fa-clock"></i>
+                <span>How long does a note last before it expires?</span>
+              </div>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-body">
+              <div class="faq-answer">
+                You can choose from <code>1 hour</code>, <code>6 hours</code>, <code>24 hours</code>, <code>3 days</code>, or <code>7 days</code> when creating a note. After that time the note is automatically deleted — even if nobody has read it.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <div class="faq-q">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Why can I only create 5 notes per day?</span>
+              </div>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-body">
+              <div class="faq-answer">
+                EncryptSecret is completely free and enforces a limit of <strong>5 notes per IP address per day</strong> to prevent abuse and keep the service available for everyone. If you genuinely need more, reach out to Isaiah directly.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <div class="faq-q">
+                <i class="fa-solid fa-mobile-screen"></i>
+                <span>Does it work on mobile?</span>
+              </div>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-body">
+              <div class="faq-answer">
+                Yes. EncryptSecret is fully responsive and works on any modern mobile browser. If you run into a problem on a specific device, please report it using the contact options below.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger" aria-expanded="false">
+              <div class="faq-q">
+                <i class="fa-solid fa-globe"></i>
+                <span>Does EncryptSecret store my IP address?</span>
+              </div>
+              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+            </button>
+            <div class="faq-body">
+              <div class="faq-answer">
+                A reference to your IP is stored only for rate-limiting (the 5 notes/day limit). It is not logged, sold, or shared. No personal data is collected beyond what is necessary to make the app function.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+   <!-- ── CONTACT ── -->
+<div class="help-section" id="contact">
+  <div class="help-section-title">
+    <i class="fa-solid fa-paper-plane"></i>
+    Contact &amp; report a bug
+  </div>
+  <div class="contact-grid">
+
+    <a href="mailto:amosisaiahtizhe@gmail.com" class="contact-card">
+      <div class="contact-icon ci--green"><i class="fa-solid fa-envelope"></i></div>
+      <div>
+        <div class="cc-title">Email Isaiah</div>
+        <div class="cc-desc">Best for bug reports and detailed questions</div>
+        <div class="cc-handle">amosisaiahtizhe@gmail.com</div>
+      </div>
+    </a>
+
+    <a href="https://github.com/amos-isaiah-tizhe" target="_blank" class="contact-card">
+      <div class="contact-icon ci--purple"><i class="fa-brands fa-github"></i></div>
+      <div>
+        <div class="cc-title">GitHub</div>
+        <div class="cc-desc">Open an issue for bugs or feature requests</div>
+        <div class="cc-handle">@amosisaiahtizhe</div>
+      </div>
+    </a>
+
+    <a href="https://instagram.com/amosisaiahtizhe" target="_blank" class="contact-card">
+      <div class="contact-icon ci--amber"><i class="fa-brands fa-instagram"></i></div>
+      <div>
+        <div class="cc-title">Instagram</div>
+        <div class="cc-desc">DM for general feedback or just to say hi</div>
+        <div class="cc-handle">@amosisaiahtizhe</div>
+      </div>
+    </a>
+
+    <a href="https://wa.me/2348137631164" target="_blank" class="contact-card">
+      <div class="contact-icon ci--green"><i class="fa-brands fa-whatsapp"></i></div>
+      <div>
+        <div class="cc-title">WhatsApp</div>
+        <div class="cc-desc">Quick questions, fast replies</div>
+        <div class="cc-handle">+234 813 763 1164</div>
+      </div>
+    </a>
+
+    <a href="https://linkedin.com/in/amosisaiahtizhe" target="_blank" class="contact-card">
+      <div class="contact-icon ci--blue"><i class="fa-brands fa-linkedin"></i></div>
+      <div>
+        <div class="cc-title">LinkedIn</div>
+        <div class="cc-desc">Connect professionally or send a message</div>
+        <div class="cc-handle">@amosisaiahtizhe</div>
+      </div>
+    </a>
+
+    <a href="https://x.com/isaiahamostizhe" target="_blank" class="contact-card">
+      <div class="contact-icon ci--purple"><i class="fa-brands fa-x-twitter"></i></div>
+      <div>
+        <div class="cc-title">Twitter / X</div>
+        <div class="cc-desc">DM or mention for general feedback</div>
+        <div class="cc-handle">@isaiahamostizhe</div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+    </main>
+
+     <!-- FOOTER -->
+    <footer class="site-footer">
+      <p>
+        &copy; <span id="year"></span> EncryptSecret &mdash;
+        End-to-End Secret. <br>
+        <a href="index.html" class="footer-link">Create a note</a> • <a href="support.html" class="footer-link">Need Help?</a> • <a href="support.html" class="footer-link">Faqs</a>
+      </p>
+       <p> Developed by | <a href="https://amos-isaiah-tizhe.onrender.com/" target="_blank" style="color: var(--accent)">Amos Isaiah Tizhe — OneXportal</a></p>
+    </footer>
+
+  </div>
+
+  <script type="module" src="assets/js/toggle.js"></script>
+
+  <script>
+    // FAQ accordion
+    document.querySelectorAll('.faq-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item    = trigger.closest('.faq-item');
+        const isOpen  = item.classList.contains('open');
+
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+          item.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+<script type="module">
+  import { initThemeToggle } from './assets/js/toggle.js';
+  initThemeToggle();
+</script>
+</body>
+</html>
