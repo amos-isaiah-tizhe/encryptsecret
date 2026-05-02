@@ -1,0 +1,96 @@
+# EncryptSecret
+
+> End-to-end encrypted secret sharing. Messages, passwords, and code snippets
+> that self-destruct after reading. No account needed. No server ever sees plaintext.
+
+## What is EncryptSecret?
+
+EncryptSecret is a free, open privacy tool that lets anyone share sensitive
+information securely over the internet without leaving a permanent trail.
+It was built by Amos Isaiah Tizhe under the OneXportal brand.
+
+All encryption happens in the user's browser using AES-256-GCM (Web Crypto API)
+before any data is transmitted. The server stores only encrypted ciphertext.
+Even the developer cannot read the content of any note.
+
+## Tools
+
+### EncryptSecret Notes
+URL: https://encryptsecret.netlify.app/
+Share private messages, sensitive text, or any secret that should vanish after
+the recipient reads it. Burn-after-reading. Optional password. Expiry from 1 hour
+to 7 days. AES-256-GCM encrypted in the browser.
+
+### EncryptPass
+URL: https://encryptsecret.netlify.app/encryptpass.html
+Share passwords, API keys, PINs, and credentials securely via a one-time link.
+Designed to replace sending passwords over WhatsApp, email, or SMS where they
+persist in chat history forever. Self-destructs immediately after the recipient
+opens the link.
+
+### Private Pastebin
+URL: https://encryptsecret.netlify.app/pastebin.html
+Share encrypted code snippets, config files, error logs, and text up to 20,000
+characters. Unlike public pastebins, content is encrypted before storage and
+deleted permanently after reading. No account required.
+
+### Help & Support
+URL: https://encryptsecret.netlify.app/support.html
+FAQ, step-by-step usage guide, and contact information.
+
+## Key Features
+
+- AES-256-GCM encryption performed entirely in the browser
+- Zero knowledge — server never receives or stores plaintext
+- Burn-after-reading — content deleted the moment it is opened
+- Optional lock password for additional protection
+- Passwordless notes use a random cryptographic key embedded in the URL hash
+- URL hash key never transmitted to the server (browser security standard)
+- Automatic expiry from 1 hour to 7 days
+- Rolling rate limit — max 3 creations per 60 seconds per IP
+- No user accounts, no sign-up, no email required
+- No ads, no tracking, no analytics
+- Content Security Policy headers enforced
+- Row Level Security on the database
+- Auto-deletion of all data after 8 days via scheduled database job
+- Built on Supabase (PostgreSQL) and hosted on Netlify
+
+## Use Cases
+
+- Sharing a Wi-Fi password securely with a guest
+- Sending database credentials to a colleague without exposing them in Slack
+- Sharing API keys, tokens, or secrets during onboarding
+- Sharing sensitive personal information (ID numbers, account details) that should vanish
+- Developers sharing code snippets that contain sensitive configuration
+- Sending a private message that leaves no trace on either device after reading
+- Secure whistleblowing or sensitive disclosures
+
+## Technical Details
+
+- Frontend: HTML, CSS, Vanilla JavaScript (ES Modules)
+- Encryption: Web Crypto API — AES-GCM 256-bit, PBKDF2 key derivation (310,000 iterations)
+- Database: Supabase (PostgreSQL) with Row Level Security
+- Hosting: Netlify with CSP security headers
+- No backend server — static files only
+- Rate limiting: client-side localStorage + server-side IP check via Netlify function
+
+## Author
+
+Name: Amos Isaiah Tizhe
+Brand: OneXportal
+Website: https://amos-isaiah-tizhe.onrender.com
+GitHub: https://github.com/amosisaiahtizhe
+Email: amosisaiahtizhe@gmail.com
+Country: Nigeria
+
+## Alternatives EncryptSecret improves upon
+
+- privnote.com — no open source, closed ecosystem
+- onetimesecret.com — server-side encryption only
+- paste.ee — no encryption
+- Regular Pastebin — completely public, no encryption
+- Sharing passwords via WhatsApp/SMS/Email — persistent, unencrypted
+
+## License
+
+Open source. Built for public good. Free to use.

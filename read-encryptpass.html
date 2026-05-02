@@ -1,22 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Encryptsecret — Read your secure, encrypted note. It will be destroyed after viewing." />
-  <title>Encryptsecret — Read Secure Note</title>
+  <meta name="description" content="EncryptPass — Read your one-time encrypted password. It will be destroyed after viewing." />
+  <title>EncryptSecret — Read Password</title>
 <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
-  <!-- Favicon (inline SVG as data URI) -->
+    <!-- Favicon (inline SVG as data URI) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2300c896'/><path d='M16 6 L24 10 L24 18 Q24 24 16 27 Q8 24 8 18 L8 10 Z' fill='none' stroke='white' stroke-width='2'/></svg>" />
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-  <!-- Main stylesheet -->
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* Password display — monospace, large, easy to read and copy */
+    .password-box {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      background: var(--surface);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      color: var(--accent);
+      word-break: break-all;
+      text-align: center;
+      margin: 1rem 0;
+      user-select: all;
+    }
+  </style>
 </head>
 <body>
 
@@ -52,7 +68,7 @@
 
     <main class="read-main">
 
-      <!-- STATE: LOADING -->
+      <!-- LOADING -->
       <div class="read-state" id="stateLoading">
         <div class="state-icon state-icon--spin">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
@@ -67,45 +83,36 @@
             <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
           </svg>
         </div>
-        <h2>Fetching your note…</h2>
+        <h2>Fetching your password…</h2>
         <p>Securely retrieving encrypted data.</p>
       </div>
 
-      <!-- STATE: LOCKED -->
+      <!-- LOCKED -->
       <div class="read-state hidden" id="stateLocked">
         <div class="state-icon state-icon--lock">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="1.8"
-               stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
+          <i class="fa-solid fa-key" style="font-size:1.5rem;"></i>
         </div>
-        <h2>Secure note waiting</h2>
-        <p id="lockedDesc">Click the button below to decrypt and reveal this message.</p>
+        <h2>Encrypted password waiting</h2>
+        <p id="lockedDesc">Click below to decrypt and reveal the password. It will be destroyed immediately after.</p>
 
-        <!-- Burn warning -->
         <div class="alert alert-warn" style="margin: 20px 0; text-align:left;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round"
-               stroke-linejoin="round">
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
           </svg>
-          <span><strong>Burn after reading.</strong> This note will be permanently deleted the moment you open it.</span>
+          <span><strong>One-time only.</strong> This password link will be permanently deleted the moment you open it.</span>
         </div>
 
-        <!-- Password field -->
         <div class="field hidden" id="passwordField">
-          <label for="readerPassword">Note password</label>
+          <label for="readerPassword">Link password</label>
           <div class="input-with-icon">
             <input
               type="password"
               id="readerPassword"
-              placeholder="Enter the note password"
+              placeholder="Enter the link password"
               autocomplete="off"
             />
-            <button class="icon-btn" id="toggleReaderPw" type="button"
-                    aria-label="Show/hide password">
+            <button class="icon-btn" id="toggleReaderPw" type="button" aria-label="Show/hide password">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" stroke-width="2"
                    stroke-linecap="round" stroke-linejoin="round">
@@ -116,11 +123,9 @@
           </div>
         </div>
 
-        <!-- Wrong password error -->
         <div class="alert alert-error hidden" id="wrongPasswordAlert">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round"
-               stroke-linejoin="round">
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/>
             <line x1="15" y1="9" x2="9" y2="15"/>
             <line x1="9" y1="9" x2="15" y2="15"/>
@@ -128,20 +133,14 @@
           <span>Wrong password. Please try again.</span>
         </div>
 
-        <!-- Unlock button -->
         <button class="btn-primary" id="unlockBtn" type="button">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2.2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-            <circle cx="12" cy="12" r="3"/>
-          </svg>
-          <span id="unlockBtnText">Open &amp; Reveal Note</span>
+          <i class="fa-solid fa-key"></i>
+          <span id="unlockBtnText">Reveal Password</span>
           <span class="btn-spinner hidden" id="unlockSpinner"></span>
         </button>
       </div>
 
-      <!-- STATE: REVEALED -->
+      <!-- REVEALED -->
       <div class="read-state hidden" id="stateRevealed">
         <div class="state-icon state-icon--success">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
@@ -150,13 +149,13 @@
             <polyline points="20 6 9 17 4 12"/>
           </svg>
         </div>
-        <h2>Note revealed</h2>
-        <p>Decrypted entirely in your browser. The original has been permanently deleted from our servers.</p>
+        <h2>Password revealed</h2>
+        <p>Decrypted in your browser. The link has been permanently destroyed.</p>
         <p id="viewCountInfo" class="view-count-info"></p>
-        <!-- The decrypted message -->
-        <div class="note-box" id="messageBox"></div>
 
-        <!-- Action buttons -->
+        <!-- Password displayed in monospace box -->
+        <div class="password-box" id="messageBox"></div>
+
         <div class="revealed-actions">
           <button class="btn-secondary" id="copyMsgBtn" type="button">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -165,25 +164,24 @@
               <rect x="9" y="9" width="13" height="13" rx="2"/>
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
             </svg>
-            <span id="copyMsgText">Copy Message</span>
+            <span id="copyMsgText">Copy Password</span>
           </button>
-          <a href="index.html" class="btn-ghost">
-            + Create your own note
+          <a href="encryptpass.html" class="btn-ghost">
+            + Share another password
           </a>
         </div>
 
-        <!-- Burn confirmation -->
         <div class="burn-notice">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2"
                stroke-linecap="round" stroke-linejoin="round">
             <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
           </svg>
-          This note has been permanently destroyed from our servers.
+          This password has been permanently destroyed from our servers.
         </div>
       </div>
 
-      <!-- STATE: BURNED / EXPIRED -->
+      <!-- BURNED -->
       <div class="read-state hidden" id="stateBurned">
         <div class="state-icon state-icon--flame">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
@@ -192,14 +190,14 @@
             <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
           </svg>
         </div>
-        <h2>Note no longer exists</h2>
-        <p>This note has already been read, has expired, or the link is invalid.<br/>It has been permanently destroyed.</p>
-        <a href="index.html" class="btn-primary" style="display:inline-flex; margin-top:8px;">
-          Create a new note
+        <h2>Password no longer exists</h2>
+        <p>This password link has already been read, has expired, or is invalid. It has been permanently destroyed.</p>
+        <a href="encryptpass.html" class="btn-primary" style="display:inline-flex; margin-top:8px;">
+          Share a new password
         </a>
       </div>
 
-      <!-- STATE: ERROR -->
+      <!-- ERROR -->
       <div class="read-state hidden" id="stateError">
         <div class="state-icon state-icon--error">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
@@ -211,21 +209,20 @@
           </svg>
         </div>
         <h2>Something went wrong</h2>
-        <p id="errorMsg">We couldn't retrieve this note. The link may be invalid or the note has expired.</p>
-        <a href="index.html" class="btn-ghost" style="margin-top: 16px; display:inline-flex;">
-          Create Note
+        <p id="errorMsg">We couldn't retrieve this password. The link may be invalid or expired.</p>
+        <a href="encryptpass.html" class="btn-ghost" style="margin-top:16px; display:inline-flex;">
+          Share a password <span style="font-size:18px">+</span>
         </a>
       </div>
 
     </main>
 
-    <!-- FOOTER -->
      <footer class="site-footer">
       <p>
         &copy; <span id="year"></span> EncryptSecret &mdash;
         End-to-End Secret. <br>
+        <a href="support.html" class="footer-link">FAQs</a> •
         <a href="index.html" class="footer-link">EncryptNote</a> •
-        <a href="encryptpass.html" class="footer-link">EncryptPass</a> •
         <a href="pastebin.html" class="footer-link">Private Pastebin</a> •
         <a href="support.html" class="footer-link">Support</a>
       </p>
@@ -234,11 +231,8 @@
 
   </div>
 
-  <!-- SUPABASE SDK  -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-
-  <!-- READ SCRIPT -->
-  <script type="module" src="assets/js/read.js"></script>
+  <script type="module" src="assets/js/encryptpass_read.js"></script>
   <script type="module">
     import { initThemeToggle } from './assets/js/toggle.js';
     initThemeToggle();

@@ -1,0 +1,48 @@
+{
+  "name": "EncryptSecret",
+  "short_name": "EncryptSecret",
+  "description": "End-to-end encrypted secret sharing. Messages, passwords, and code snippets that self-destruct after reading.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e1117",
+  "theme_color": "#00c896",
+  "lang": "en",
+  "categories": ["productivity", "utilities", "security"],
+  "icons": [
+    {
+      "src": "assets/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Create a Note",
+      "short_name": "Note",
+      "description": "Write and encrypt a self-destructing note",
+      "url": "/",
+      "icons": [{ "src": "assets/img/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "EncryptPass",
+      "short_name": "Password",
+      "description": "Share a password securely via one-time link",
+      "url": "/encryptpass.html",
+      "icons": [{ "src": "assets/img/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Private Pastebin",
+      "short_name": "Pastebin",
+      "description": "Share encrypted code snippets privately",
+      "url": "/pastebin.html",
+      "icons": [{ "src": "assets/img/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

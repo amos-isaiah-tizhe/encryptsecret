@@ -4,34 +4,66 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EncryptSecret — Redirecting…</title>
+    <!-- Favicon (inline SVG as data URI) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2300c896'/><path d='M16 6 L24 10 L24 18 Q24 24 16 27 Q8 24 8 18 L8 10 Z' fill='none' stroke='white' stroke-width='2'/></svg>" />
   <script>
-    // GitHub Pages serves this 404.html whenever a URL path doesn't match a real file.
-    // Example: /read?id=abc → no file called "read" exists → GitHub shows this page.
+    // GitHub Pages shows this 404.html whenever a URL path doesn't match a real file.
+    // This script handles clean URL redirects for all three tools:
     //
-    // This script checks: "was the user trying to go to /read?id=..."?
-    // If YES → send them to read.html?id=... instead.
-    // If NO  → send them back to the homepage.
+    //   /read?id=...              → /read.html?id=...
+    //   /read-encryptpass?id=...  → /read-encryptpass.html?id=...
+    //   /read-pastebin?id=...     → /read-pastebin.html?id=...
+    //
+    // Everything else → homepage
 
     (function () {
-      const path = window.location.pathname; // e.g. "/read"
-      const search = window.location.search; // e.g. "?id=2603d79a-..."
+      const path   = window.location.pathname; // e.g. "/read-encryptpass"
+      const search = window.location.search;   // e.g. "?id=abc123"
 
-      if (path.endsWith("/read") || path.endsWith("/read/")) {
-        // They came from an old link like /read?id=...
-        // Send them to read.html with the same ?id= query attached
-        const base = window.location.pathname.replace(/\/read\/?$/, "");
-window.location.replace(base + "/read.html" + search);
+      // Strip trailing slash for clean matching
+      const cleanPath = path.replace(/\/$/, "");
+
+      // Build base (handles subfolder deployments like /encryptsecret/)
+      const getBase = (suffix) =>
+        window.location.pathname.replace(new RegExp(suffix + "\\/?$"), "");
+
+      if (cleanPath.endsWith("/read")) {
+        const base = getBase("/read");
+        window.location.replace(base + "/read.html" + search);
+
+      } else if (cleanPath.endsWith("/read-encryptpass")) {
+        const base = getBase("/read-encryptpass");
+        window.location.replace(base + "/read-encryptpass.html" + search);
+
+      } else if (cleanPath.endsWith("/read-pastebin")) {
+        const base = getBase("/read-pastebin");
+        window.location.replace(base + "/read-pastebin.html" + search);
+
+      } else if (cleanPath.endsWith("/encryptpass")) {
+        const base = getBase("/encryptpass");
+        window.location.replace(base + "/encryptpass.html");
+
+      } else if (cleanPath.endsWith("/pastebin")) {
+        const base = getBase("/pastebin");
+        window.location.replace(base + "/pastebin.html");
+
       } else {
         // Unknown path — go home
         window.location.replace("/");
       }
     })();
   </script>
+  <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
 </head>
 <body>
   <p style="font-family:sans-serif;text-align:center;margin-top:4rem;color:#888;">
     Redirecting… if nothing happens,
-    <a href="/">click here to go home</a>.
+    <a href="/">click here to create a secret</a>.
   </p>
+    <script type="module">
+    import { initThemeToggle } from './assets/js/toggle.js';
+    initThemeToggle();
+  </script>
+  <script src="/assets/js/pwa.js"></script>
 </body>
 </html>

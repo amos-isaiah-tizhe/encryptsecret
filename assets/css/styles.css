@@ -802,7 +802,8 @@ select option {
 }
 
 /* The revealed message box */
-.message-box {
+.message-box, .password-box,
+.paste-box, .note-box {
   background: var(--surface);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
@@ -843,6 +844,9 @@ select option {
   transition: color 0.2s;
 }
 .footer-link:hover { color: var(--text); }
+.author-link {
+  color: var(--amber);
+}
 
 /* UTILITY CLASSES */
 

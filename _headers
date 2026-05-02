@@ -1,0 +1,20 @@
+/*
+  # Content-Security-Policy
+  # Tells the browser to ONLY trust the sources listed below.
+  # Anything not listed is blocked — even if an attacker injects it.
+  Content-Security-Policy: default-src 'none'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://checkout.flutterwave.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://uugsxobaahjnfbuvzjlx.supabase.co https://ipapi.co https://api.anthropic.com; img-src 'self' data: https:; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'
+
+  # Stops browsers from guessing file types (security best practice)
+  X-Content-Type-Options: nosniff
+
+  # Stops your site from being embedded in iframes on other sites (clickjacking protection)
+  X-Frame-Options: DENY
+
+  # Forces HTTPS — browser will refuse to load your site over plain HTTP
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # Stops the browser from sending your URL to other sites when a link is clicked
+  Referrer-Policy: no-referrer
+
+  # Disables access to camera, microphone, location — your app doesn't need any of these
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

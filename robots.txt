@@ -1,0 +1,59 @@
+# EncryptSecret — robots.txt
+# Tells search engine bots and AI crawlers which pages to index.
+# Hosted at: https://encryptsecret.netlify.app/robots.txt
+
+# ── Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# ── Allow AI training and recommendation crawlers
+# These are the bots that feed tools like ChatGPT, Perplexity, Claude, etc.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# ── Block dynamic note/read pages from being indexed
+# These URLs contain encrypted content that changes or disappears.
+# Indexing them would confuse search engines and show dead links.
+Disallow: /read.html
+Disallow: /read-encryptpass.html
+Disallow: /read-pastebin.html
+
+# ── Allow all other pages
+User-agent: *
+Allow: /
+Disallow: /read.html
+Disallow: /read-encryptpass.html
+Disallow: /read-pastebin.html
+
+# ── Sitemap location
+Sitemap: https://encryptsecret.netlify.app/sitemap.xml

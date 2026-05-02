@@ -1,100 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>EncryptSecret — Send Secrets That Self-Destruct | Encrypted Notes</title>
-<meta name="description" content="Send encrypted notes, passwords, and secrets that permanently self-destruct after reading. AES-256 encrypted in your browser. No account needed. Free." />
-<meta name="keywords" content="encrypted notes, self-destructing messages, burn after reading, one-time secret, secure note sharing, privnote alternative, encrypted message, disappearing messages" />
+ <title>Private Encrypted Pastebin — Share Code Secretly | EncryptSecret</title>
+<meta name="description" content="Share code snippets, config files, and error logs with end-to-end encryption. Unlike regular pastebins, your content is encrypted before storage and permanently deleted after reading." />
+<meta name="keywords" content="encrypted pastebin, private pastebin, secure code sharing, encrypted code snippet, private code share, pastebin alternative, secure text sharing" />
 <meta name="author" content="Amos Isaiah Tizhe — OneXportal" />
 <meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://encryptsecret.netlify.app/" />
+<link rel="canonical" href="https://encryptsecret.netlify.app/pastebin.html" />
 
-<!-- Open Graph (WhatsApp, Facebook, LinkedIn previews) -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://encryptsecret.netlify.app/" />
-<meta property="og:title" content="EncryptSecret — Send Secrets That Self-Destruct" />
-<meta property="og:description" content="AES-256 encrypted notes that permanently delete themselves after the recipient reads them. No account. No trace." />
+<meta property="og:url" content="https://encryptsecret.netlify.app/pastebin.html" />
+<meta property="og:title" content="Private Encrypted Pastebin — Share Code Secretly" />
+<meta property="og:description" content="Unlike regular pastebins, your code is encrypted before storage and permanently deleted after reading. No account needed." />
 <meta property="og:image" content="https://encryptsecret.netlify.app/assets/img/og-image.png" />
 <meta property="og:site_name" content="EncryptSecret" />
-<meta property="og:locale" content="en_US" />
 
-<!-- Twitter / X Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@isaiahamostizhe" />
-<meta name="twitter:creator" content="@isaiahamostizhe" />
-<meta name="twitter:title" content="EncryptSecret — Send Secrets That Self-Destruct" />
-<meta name="twitter:description" content="AES-256 encrypted notes that permanently delete themselves after the recipient reads them. No account. No trace." />
+<meta name="twitter:title" content="Private Encrypted Pastebin — Share Code Secretly" />
+<meta name="twitter:description" content="Unlike regular pastebins, your code is encrypted before storage and permanently deleted after reading. No account needed." />
 <meta name="twitter:image" content="https://encryptsecret.netlify.app/assets/img/og-image.png" />
 
-<!-- PWA / Manifest -->
 <link rel="manifest" href="/site.webmanifest" />
 <meta name="theme-color" content="#00c896" />
-<meta name="mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="EncryptSecret" />
 
-<!-- Structured Data — WebApplication schema (tells Google exactly what your app is) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "EncryptSecret",
-  "url": "https://encryptsecret.netlify.app",
-  "description": "End-to-end encrypted secret sharing. Messages, passwords, and code snippets that self-destruct after reading. No account needed. Free forever.",
-  "applicationCategory": "SecurityApplication",
+  "name": "Private Pastebin — by EncryptSecret",
+  "url": "https://encryptsecret.netlify.app/pastebin.html",
+  "description": "Encrypted private pastebin for code snippets, config files, and sensitive text. Content is AES-256 encrypted before storage and permanently deleted after reading.",
+  "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
-  "browserRequirements": "Requires a modern browser with Web Crypto API support",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "NG"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Amos Isaiah Tizhe",
-    "url": "https://amos-isaiah-tizhe.onrender.com",
-    "sameAs": [
-      "https://github.com/amosisaiahtizhe",
-      "https://linkedin.com/in/amosisaiahtizhe",
-      "https://instagram.com/amosisaiahtizhe"
-    ]
-  },
-  "creator": {
-    "@type": "Organization",
-    "name": "OneXportal",
-    "url": "https://amos-isaiah-tizhe.onrender.com"
-  },
-  "featureList": [
-    "AES-256-GCM browser-side encryption",
-    "Burn-after-reading self-destruction",
-    "Optional lock password",
-    "Expiry timer from 1 hour to 7 days",
-    "Zero knowledge — server never sees plaintext",
-    "No account or sign-up required",
-    "One-time password sharing via EncryptPass",
-    "Encrypted private pastebin for code snippets"
-  ]
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "NG" },
+  "author": { "@type": "Person", "name": "Amos Isaiah Tizhe", "url": "https://amos-isaiah-tizhe.onrender.com" }
 }
 </script>
 
-  <!-- Favicon (inline SVG as data URI) -->
+   <!-- Favicon (inline SVG as data URI) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2300c896'/><path d='M16 6 L24 10 L24 18 Q24 24 16 27 Q8 24 8 18 L8 10 Z' fill='none' stroke='white' stroke-width='2'/></svg>" />
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-  <!-- Main stylesheet -->
   <link rel="stylesheet" href="assets/css/styles.css" />
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
+<link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
+  <style>
+    textarea#message {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+  </style>
 </head>
 <body>
-  
+
   <div class="bg-grid" aria-hidden="true"></div>
   <div class="bg-glow" aria-hidden="true"></div>
 
@@ -113,6 +77,7 @@
         Encrypt<span class="logo-accent">Secret</span>
       </a>
       <nav class="site-nav">
+        <a href="index.html" class="nav-link active">EncryptNote</a>
         <a href="encryptpass.html" class="nav-link">EncryptPass</a>
          <a href="pastebin.html" class="nav-link">Private PasteBin</a>
          <a href="pastebin.html" class="nav-link">Private PasteBin</a>
@@ -126,58 +91,45 @@
 
     <section class="hero">
       <div class="hero-badge">
-        <!-- Lock icon -->
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2.5"
-             stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="11" width="18" height="11" rx="2"/>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-        </svg>
-        End-to-end encrypted note.
+        <i class="fa-solid fa-code"></i>
+        Encrypted private pastebin
       </div>
       <h1 class="hero-title">
-        Secrets that<br/>
-        <span class="hero-highlight">vanish after reading</span>
+        Share code snippets<br/>
+        <span class="hero-highlight">privately and securely</span>
       </h1>
       <p class="hero-subtitle">
-        Your message is encrypted <em>in your browser</em> before it ever touches our servers.
-        <br> Nobody, not even us can read it.
+        Encrypted in your browser. No account. No history.
+        <br>Share the link — it self-destructs after reading.
       </p>
     </section>
 
-    <!-- NOTE CARD -->
     <main class="card" id="create-card">
 
-      <!-- Step indicator -->
       <div class="step-label">
-        <span class="step-number">1</span> Write your message
+        <span class="step-number">1</span> Paste your code or text
       </div>
 
-      <!-- Message textarea -->
       <div class="field">
         <div class="field-header">
-          <label for="message">Secret message</label>
-          <span class="char-count" id="charCount">0 / 5000</span>
+          <label for="message">Code / Text</label>
+          <span class="char-count" id="charCount">0 / 20000</span>
         </div>
         <textarea
           id="message"
-          placeholder="Type anything — passwords, API keys, private links, sensitive info…"
-          maxlength="5000"
-          rows="7"
+          placeholder="Paste your code snippet, config file, error log, or any text you want to share privately…"
+          maxlength="20000"
+          rows="12"
           autocomplete="off"
           spellcheck="false"
         ></textarea>
       </div>
 
-      <!-- Divider -->
       <div class="section-divider">
         <span class="step-number">2</span> Set options
       </div>
 
-      <!-- Options row -->
       <div class="options-row">
-
-        <!-- Password field -->
         <div class="field">
           <label for="password">
             Password
@@ -187,12 +139,10 @@
             <input
               type="password"
               id="password"
-              placeholder="Add a lock password"
+              placeholder="Add a password to this paste"
               autocomplete="new-password"
             />
-            <button class="icon-btn" id="togglePassword" type="button"
-                    aria-label="Show/hide password">
-              <!-- Eye icon (shown by default) -->
+            <button class="icon-btn" id="togglePassword" type="button" aria-label="Show/hide password">
               <svg id="eyeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
@@ -200,7 +150,6 @@
               </svg>
             </button>
           </div>
-          <!-- Password strength bar -->
           <div class="strength-bar" id="strengthBar" aria-hidden="true">
             <span class="strength-pip" id="pip1"></span>
             <span class="strength-pip" id="pip2"></span>
@@ -209,11 +158,8 @@
           <span class="strength-label" id="strengthLabel"></span>
         </div>
 
-        <!-- Expiry select -->
         <div class="field">
-          <label for="expiry">
-            Expires after
-          </label>
+          <label for="expiry">Expires after</label>
           <div class="select-wrap">
             <select id="expiry">
               <option value="1">1 hour</option>
@@ -224,7 +170,6 @@
               <option value="72">3 days</option>
               <option value="168">7 days</option>
             </select>
-            <!-- Chevron icon -->
             <svg class="select-chevron" width="15" height="15" viewBox="0 0 24 24"
                  fill="none" stroke="currentColor" stroke-width="2.5"
                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -234,21 +179,17 @@
         </div>
       </div>
 
-      <!-- No-password warning -->
       <div class="alert alert-warn" id="noPasswordWarn">
-        <!-- Warning icon -->
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
           <line x1="12" y1="9" x2="12" y2="13"/>
           <line x1="12" y1="17" x2="12.01" y2="17"/>
         </svg>
-        <span><strong>No password set.</strong> Anyone with the link will be able to read this note.</span>
+        <span><strong>No password set.</strong> Anyone with the link can read this paste.</span>
       </div>
 
-      <!-- Error alert (hidden by default) -->
       <div class="alert alert-error hidden" id="errorAlert">
-        <!-- X-circle icon -->
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"/>
@@ -258,121 +199,86 @@
         <span id="errorText">Something went wrong.</span>
       </div>
 
-      <!-- Create button -->
       <button class="btn-primary" id="createBtn" type="button">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
-             stroke-linejoin="round">
-          <rect x="3" y="11" width="18" height="11" rx="2"/>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-        </svg>
-        <span id="createBtnText">Create Secure Note</span>
+        <i class="fa-solid fa-code"></i>
+        <span id="createBtnText">Create Private Paste</span>
         <span class="btn-spinner hidden" id="createSpinner"></span>
       </button>
 
-      <!-- SUCCESS BOX (hidden until note is created) -->
       <div class="success-box hidden" id="successBox">
         <div class="success-header">
-          <!-- Check icon -->
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-               stroke-linejoin="round">
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="20 6 9 17 4 12"/>
           </svg>
-          Note created, share this link
+          Paste created — share this link
         </div>
         <div class="link-display" id="linkDisplay"></div>
         <div class="success-actions">
           <button class="btn-secondary" id="copyLinkBtn" type="button">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                 stroke-linejoin="round">
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="9" y="9" width="13" height="13" rx="2"/>
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
             </svg>
             <span id="copyBtnText">Copy Link</span>
           </button>
           <button class="btn-ghost" id="newNoteBtn" type="button">
-            + New note
+            + New paste
           </button>
         </div>
         <div class="burn-notice">
-          <!-- Flame icon -->
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round"
-               stroke-linejoin="round">
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
           </svg>
-          This note will be permanently destroyed the moment it is opened.
+          This paste will be permanently destroyed the moment it is opened.
         </div>
       </div>
 
     </main>
-    
-      <!-- /#create-card -->
 
-    <!-- HOW IT WORKS SECTION -->
     <section class="how-it-works" id="how-it-works">
-      <h2 class="section-title">How it works</h2>
+      <h2 class="section-title">Why use Private Pastebin?</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-icon step-icon--write">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/>
-            </svg>
+            <i class="fa-solid fa-file-code"></i>
           </div>
-          <h3>Write</h3>
-          <p>Type your secret. Set an optional password and expiry time.</p>
+          <h3>No plain text storage</h3>
+          <p>Unlike regular pastebins, your code is encrypted before it ever touches our servers.</p>
         </div>
         <div class="step-card">
           <div class="step-icon step-icon--encrypt">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2"/>
-              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-            </svg>
+            <i class="fa-solid fa-lock"></i>
           </div>
-          <h3>Encrypt</h3>
-          <p>Your message is AES-256 encrypted in your browser, before it leaves your device.</p>
+          <h3>AES-256 encrypted</h3>
+          <p>Military-grade encryption in your browser. Even we cannot read what you pasted.</p>
         </div>
         <div class="step-card">
           <div class="step-icon step-icon--share">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/>
-              <circle cx="18" cy="19" r="3"/>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-            </svg>
+            <i class="fa-solid fa-user-secret"></i>
           </div>
-          <h3>Share</h3>
-          <p>Send the unique link to your recipient via any channel.</p>
+          <h3>No account needed</h3>
+          <p>No sign-up. No tracking. No logs. Just paste, share, and it's gone.</p>
         </div>
         <div class="step-card">
           <div class="step-icon step-icon--burn">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.8"
-                 stroke-linecap="round" stroke-linejoin="round">
-              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
-            </svg>
+            <i class="fa-solid fa-fire"></i>
           </div>
-          <h3>Burn</h3>
-          <p>Once opened, the note is instantly deleted from our servers forever.</p>
+          <h3>Self-destructs</h3>
+          <p>The paste is permanently deleted after reading. Nothing left on our servers.</p>
         </div>
       </div>
     </section>
 
-    <footer class="site-footer">
+      <footer class="site-footer">
       <p>
         &copy; <span id="year"></span> EncryptSecret &mdash;
         End-to-End Secret. <br>
         <a href="support.html" class="footer-link">FAQs</a> •
         <a href="encryptpass.html" class="footer-link">EncryptPass</a> •
-        <a href="pastebin.html" class="footer-link">Private Pastebin</a> •
+        <a href="index.html" class="footer-link">EncryptNote</a> •
         <a href="support.html" class="footer-link">Support</a>
       </p>
       <p> Developed by | <a href="https://amos-isaiah-tizhe.onrender.com/" target="_blank" class="author-link">Amos Isaiah Tizhe — OneXportal</a></p>
@@ -380,19 +286,13 @@
 
   </div>
 
-  <!-- SUPABASE SDK (via CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-
-  <!-- APP SCRIPTS (type="module" for ES module imports) -->
-  <script type="module" src="assets/js/create.js"></script>
+  <script type="module" src="assets/js/pastebin_create.js"></script>
   <script type="module">
     import { initThemeToggle } from './assets/js/toggle.js';
     initThemeToggle();
   </script>
-
-  <!-- Footer year -->
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="/assets/js/pwa.js"></script>
-
+<script src="/assets/js/pwa.js"></script>
 </body>
 </html>

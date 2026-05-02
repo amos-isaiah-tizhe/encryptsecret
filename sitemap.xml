@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Home / Create Note -->
+  <url>
+    <loc>https://encryptsecret.netlify.app/</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- EncryptPass — One-time password sharing -->
+  <url>
+    <loc>https://encryptsecret.netlify.app/encryptpass.html</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Private Pastebin — Encrypted code/text sharing -->
+  <url>
+    <loc>https://encryptsecret.netlify.app/pastebin.html</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Help & Support -->
+  <url>
+    <loc>https://encryptsecret.netlify.app/support.html</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!--
+    NOTE: read.html, read-encryptpass.html, read-pastebin.html are
+    intentionally excluded — they contain dynamic encrypted content
+    that self-destructs and should never be indexed by search engines.
+  -->
+
+</urlset>

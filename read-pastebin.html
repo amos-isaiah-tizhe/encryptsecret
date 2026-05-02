@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EncryptSecret — Read your encrypted private paste. It will be destroyed after viewing." />
+  <title>EncryptSecret — Read Paste</title>
+ <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
+   <!-- Favicon (inline SVG as data URI) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2300c896'/><path d='M16 6 L24 10 L24 18 Q24 24 16 27 Q8 24 8 18 L8 10 Z' fill='none' stroke='white' stroke-width='2'/></svg>" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .paste-box {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      background: var(--surface);
+      border: 1.5px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      color: var(--text);
+      white-space: pre-wrap;
+      word-break: break-word;
+      text-align: left;
+      margin: 1rem 0;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--read" aria-hidden="true"></div>
+  <div class="page-wrapper page-wrapper--centered">
+
+     <header class="site-header">
+     <a href="index.html" class="logo">
+        <span class="logo-icon">
+          <!-- Shield SVG icon | site icon -->
+          <svg width="28px" hight="28px" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </span>
+        Encrypt<span class="logo-accent">Secret</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html" class="nav-link active">EncryptNote</a>
+        <a href="encryptpass.html" class="nav-link">EncryptPass</a>
+         <a href="pastebin.html" class="nav-link">Private PasteBin</a>
+         <a href="pastebin.html" class="nav-link">Private PasteBin</a>
+         <a href="support.html" class="nav-link">support</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle">
+        <i id="themeIcon" class="fa-solid fa-moon"></i>
+        <span id="themeLabel">Dark</span>
+      </button>
+
+
+    <main class="read-main">
+
+      <div class="read-state" id="stateLoading">
+        <div class="state-icon state-icon--spin">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+            <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+          </svg>
+        </div>
+        <h2>Fetching your paste…</h2>
+        <p>Securely retrieving encrypted data.</p>
+      </div>
+
+      <div class="read-state hidden" id="stateLocked">
+        <div class="state-icon state-icon--lock">
+          <i class="fa-solid fa-code" style="font-size:1.5rem;"></i>
+        </div>
+        <h2>Encrypted paste waiting</h2>
+        <p id="lockedDesc">Click below to decrypt and reveal the paste. It will be destroyed immediately after.</p>
+        <div class="alert alert-warn" style="margin:20px 0;text-align:left;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+          </svg>
+          <span><strong>Burn after reading.</strong> This paste is permanently deleted the moment you open it.</span>
+        </div>
+        <div class="field hidden" id="passwordField">
+          <label for="readerPassword">Paste password</label>
+          <div class="input-with-icon">
+            <input type="password" id="readerPassword" placeholder="Enter the paste password" autocomplete="off" />
+            <button class="icon-btn" id="toggleReaderPw" type="button" aria-label="Show/hide password">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="alert alert-error hidden" id="wrongPasswordAlert">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+          </svg>
+          <span>Wrong password. Please try again.</span>
+        </div>
+        <button class="btn-primary" id="unlockBtn" type="button">
+          <i class="fa-solid fa-code"></i>
+          <span id="unlockBtnText">Reveal Paste</span>
+          <span class="btn-spinner hidden" id="unlockSpinner"></span>
+        </button>
+      </div>
+
+      <div class="read-state hidden" id="stateRevealed">
+        <div class="state-icon state-icon--success">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <h2>Paste revealed</h2>
+        <p>Decrypted in your browser. The original has been permanently deleted.</p>
+        <p id="viewCountInfo" class="view-count-info"></p>
+        <div class="paste-box" id="messageBox"></div>
+        <div class="revealed-actions">
+          <button class="btn-secondary" id="copyMsgBtn" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span id="copyMsgText">Copy Code</span>
+          </button>
+          <a href="pastebin.html" class="btn-ghost">+ Create your own paste</a>
+        </div>
+        <div class="burn-notice">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+          </svg>
+          This paste has been permanently destroyed from our servers.
+        </div>
+      </div>
+
+      <div class="read-state hidden" id="stateBurned">
+        <div class="state-icon state-icon--flame">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+          </svg>
+        </div>
+        <h2>Paste no longer exists</h2>
+        <p>This paste has already been read, has expired, or the link is invalid.</p>
+        <a href="pastebin.html" class="btn-primary" style="display:inline-flex;margin-top:8px;">Create a new paste</a>
+      </div>
+
+      <div class="read-state hidden" id="stateError">
+        <div class="state-icon state-icon--error">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <h2>Something went wrong</h2>
+        <p id="errorMsg">We couldn't retrieve this paste. The link may be invalid or expired.</p>
+        <a href="pastebin.html" class="btn-ghost" style="margin-top:16px;display:inline-flex;">Create paste +</a>
+      </div>
+
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        &copy; <span id="year"></span> EncryptSecret &mdash;
+        End-to-End Secret. <br>
+        <a href="support.html" class="footer-link">FAQs</a> •
+        <a href="encryptpass.html" class="footer-link">EncryptPass</a> •
+        <a href="index.html" class="footer-link">EncryptNote</a> •
+        <a href="support.html" class="footer-link">Support</a>
+      </p>
+      <p> Developed by | <a href="https://amos-isaiah-tizhe.onrender.com/" target="_blank" class="author-link">Amos Isaiah Tizhe — OneXportal</a></p>
+    </footer>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script type="module" src="assets/js/pastebin_read.js"></script>
+  <script type="module">
+    import { initThemeToggle } from './assets/js/toggle.js';
+    initThemeToggle();
+  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="/assets/js/pwa.js"></script>
+</body>
+</html>
