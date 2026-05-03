@@ -5,7 +5,7 @@
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0e1117",
-  "theme_color": "#00c896",
+  "theme_color": "#906fe5",
   "lang": "en",
   "categories": ["productivity", "utilities", "security"],
   "icons": [
